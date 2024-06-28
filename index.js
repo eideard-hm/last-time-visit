@@ -1,3 +1,5 @@
+import { join } from 'node:path';
+
 import cors from 'cors';
 import express from 'express';
 
@@ -11,12 +13,14 @@ const app = express();
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+// Serve index.html file from public directory
+app.use(express.static(join(process.cwd(), 'public')));
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // server index.html file
 app.get('/', (_, res) => {
-  res.sendFile('index.html', { root: '.' });
+  res.sendFile('index.html', { root: path.join(pwd, 'public') });
 });
 
 app.post('/visit', async (req, res) => {
