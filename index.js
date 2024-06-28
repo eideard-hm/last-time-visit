@@ -13,11 +13,6 @@ app.use(cors());
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-// server index.html file
-app.get('/', (req, res) => {
-  res.sendFile('index.html', { root: '.' });
-});
-
 app.post('/visit', async (req, res) => {
   const visit = req.body;
   const { data, error } = await resend.emails.send({
@@ -44,6 +39,11 @@ app.post('/visit', async (req, res) => {
   }
 
   return res.json({ message: data });
+});
+
+// server index.html file
+app.get('/', (_, res) => {
+  res.sendFile('index.html', { root: '.' });
 });
 
 app.listen(process.env.PORT, () => {
