@@ -40,7 +40,11 @@ app.post('/visit', async (req, res) => {
       <p>Language: ${visit.languages[0].name}</p>
       <p>Timezone: ${visit.timezone}</p>
       <p>Airport: ${visit.airport.name}</p>
-      <p>Coordinates: ${visit.coordinates.latitude}, ${visit.coordinates.longitude}</p>
+      <p>Coordinates: ${visit.coordinates.latitude}, ${visit.coordinates.longitude}
+      </p>
+      <p>
+      Google Maps: <a href="https://www.google.com/maps/dir/?api=1&origin=current+location&destination=${visit.coordinates.latitude},${visit.coordinates.longitude}">Ver en Google Maps</a>
+      </p>
     `,
   });
 
